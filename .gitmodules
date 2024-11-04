@@ -2,8 +2,9 @@
 	path = libs/PX4-GPSDrivers
 	url = https://github.com/PX4/GpsDrivers.git
 [submodule "libs/mavlink/include/mavlink/v2.0"]
-	path = libs/mavlink/include/mavlink/v2.0
-	url = https://github.com/mavlink/c_library_v2.git
+	path = libs/mavlink/
+	url = git@github.com:RobKenobi/mavlink.git
+	branch = feature/telemetrix
 [submodule "libs/xz-embedded"]
 	path = libs/xz-embedded
 	url = https://github.com/Auterion/xz-embedded.git
