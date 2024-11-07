@@ -666,6 +666,11 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
         _handleMessageInterval(message);
         break;
     }
+    case MAVLINK_MSG_ID_WIND_SENSOR: 
+    {
+        _handleWindSensor(message);
+        break;
+    }
     }
 
     // This must be emitted after the vehicle processes the message. This way the vehicle state is up to date when anyone else
@@ -3977,6 +3982,23 @@ void Vehicle::setMessageRate(uint8_t compId, uint16_t msgId, int32_t rate)
         msgId,
         interval
     );
+}
+
+void Vehicle::_handleWindSensor(mavlink_message_t& message)
+{
+    mavlink_wind_sensor_t wind;
+    mavlink_msg_wind_sensor_decode(&message, &wind);
+    
+    _windFactGroup.speed3D()->setRawValue(wind.wind_speed_3d);
+    _windFactGroup.speed2D()->setRawValue(wind.wind_speed_2d);
+    _windFactGroup.horizontalDirection()->setRawValue(wind.horizontal_wind_direction);
+    _windFactGroup.verticalDirection()->setRawValue(wind.vertical_wind_direction);
+    _windFactGroup.temperature()->setRawValue(wind.sonic_temperature);
+    _windFactGroup.speedSound()->setRawValue(wind.speed_of_sound);
+    _windFactGroup.humidity()->setRawValue(wind.humidity);
+    _windFactGroup.dewPoint()->setRawValue(wind.drew_point);
+    _windFactGroup.pressure()->setRawValue(wind.pressure);
+    _windFactGroup.airDensity()->setRawValue(wind.air_density);
 }
 
 /*===========================================================================*/

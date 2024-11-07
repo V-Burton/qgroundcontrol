@@ -9,9 +9,25 @@
 
 #pragma once
 
-#include <stdint.h>
+#define MAVLINK_COMM_NUM_BUFFERS 16
+#define MAVLINK_EXTERNAL_RX_STATUS
+#define MAVLINK_USE_MESSAGE_INFO
 
-#define HAVE_MAVLINK_CHANNEL_T
+// Inclure mavlink_types.h avant la déclaration
+#include <mavlink/v2.0/mavlink_types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern mavlink_status_t m_mavlink_status[MAVLINK_COMM_NUM_BUFFERS];
+#ifdef __cplusplus
+}
+#endif
+
+#include <stdint.h>
+#include <mavlink/v2.0/all/mavlink.h>
+
+// #define HAVE_MAVLINK_CHANNEL_T
 #ifdef HAVE_MAVLINK_CHANNEL_T
 typedef enum : uint8_t {
     MAVLINK_COMM_0,
@@ -33,24 +49,22 @@ typedef enum : uint8_t {
 } mavlink_channel_t;
 #endif
 
-#define MAVLINK_COMM_NUM_BUFFERS 16
-#define MAVLINK_MAX_SIGNING_STREAMS MAVLINK_COMM_NUM_BUFFERS
+// #define MAVLINK_MAX_SIGNING_STREAMS MAVLINK_COMM_NUM_BUFFERS
 
-#include <mavlink_types.h>
+// #include <mavlink_types.h>
 
-#define MAVLINK_EXTERNAL_RX_STATUS
-#ifdef MAVLINK_EXTERNAL_RX_STATUS
-    extern mavlink_status_t m_mavlink_status[MAVLINK_COMM_NUM_BUFFERS];
-#endif
+// #ifdef MAVLINK_EXTERNAL_RX_STATUS
+//     extern mavlink_status_t m_mavlink_status[MAVLINK_COMM_NUM_BUFFERS];
+// #endif
 
 #define MAVLINK_GET_CHANNEL_STATUS
 #ifdef MAVLINK_GET_CHANNEL_STATUS
     extern mavlink_status_t* mavlink_get_channel_status(uint8_t chan);
 #endif
 
+// Comment these two lines to increase security and integrity of the MAVLink communication
 // #define MAVLINK_NO_SIGN_PACKET
 // #define MAVLINK_NO_SIGNATURE_CHECK
-#define MAVLINK_USE_MESSAGE_INFO
 
 #include <stddef.h>
 

@@ -933,6 +933,7 @@ private slots:
     void _doSetHomeTerrainReceived          (bool success, QList<double> heights);
     void _updateAltAboveTerrain             ();
     void _altitudeAboveTerrainReceived      (bool sucess, QList<double> heights);
+    void _handleWindSensor                  (mavlink_message_t& message);
 
 private:
     void _loadJoystickSettings          ();

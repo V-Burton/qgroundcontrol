@@ -1,8 +1,8 @@
 [submodule "src/GPS/Drivers"]
 	path = libs/PX4-GPSDrivers
 	url = https://github.com/PX4/GpsDrivers.git
-[submodule "libs/mavlink/include/mavlink/v2.0"]
-	path = libs/mavlink/include/mavlink/v2.0
+[submodule "libs/mavlink/generated/include/mavlink/v2.0"]
+	path = libs/mavlink/generated/include/mavlink/v2.0
 	url = https://github.com/mavlink/c_library_v2.git
 [submodule "libs/xz-embedded"]
 	path = libs/xz-embedded
@@ -22,3 +22,6 @@
 [submodule "resources/SDL_GameControllerDB"]
 	path = resources/SDL_GameControllerDB
 	url = https://github.com/mdqinc/SDL_GameControllerDB.git
+[submodule "libs/mavlink/pymavlink"]
+    path = libs/mavlink/pymavlink
+    url = https://github.com/V-Burton/pymavlink.git

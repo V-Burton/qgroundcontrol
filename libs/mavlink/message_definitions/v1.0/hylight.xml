@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<mavlink>
+  <!-- XML file for prototyping definitions for common.xml -->
+  <include>common.xml</include>
+  <version>0</version>
+  <dialect>0</dialect>
+  <messages>
+    <message id="203" name="RIGID_DATA">
+      <description>Differential pressure sensors measurement between atmospheric pressure and airship inner pressure</description>
+      <field type="uint64_t" name="timestamp">Timestamp</field>
+      <field type="float[3]" name="pressure_in">Pressure In</field>
+      <field type="float[3]" name="pressure_out">Pressure Out</field>
+      <field type="float" name="mean_in">Mean In Pressure</field>
+      <field type="float" name="mean_out">Mean Out Pressure</field>
+      <field type="float" name="differential">Differential Pressure</field>
+    </message>
+    <message id="202" name="WIND_SENSOR">
+      <description>Airspeed sensor's measurement</description>
+      <field type="uint64_t" name="timestamp">Timestamp</field>
+      <field type="float" name="wind_speed_3d">Wind speed norm 3D</field>
+      <field type="float" name="wind_speed_2d">Wind speed norm 2D (horizontal plane projection)</field>
+      <field type="float" name="horizontal_wind_direction">Horizontal wind direction</field>
+      <field type="float" name="vertical_wind_direction">Vertical wind direction</field>
+      <field type="float" name="sonic_temperature">Sonic temperature</field>
+      <field type="float" name="speed_of_sound">Speed of sound</field>
+      <field type="float" name="humidity">Humidity</field>
+      <field type="float" name="drew_point">Drew point</field>
+      <field type="float" name="pressure">Pressure</field>
+      <field type="float" name="air_density">Air density</field>
+    </message>
+  </messages>
+</mavlink>

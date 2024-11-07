@@ -7,9 +7,14 @@
  *
  ****************************************************************************/
 
+#define MAVLINK_USE_MESSAGE_INFO
+#define MAVLINK_EXTERNAL_RX_STATUS  // si nécessaire
+#define MAVLINK_GET_INFO_HELPER
+
 #include "MAVLinkMessage.h"
 #include "MAVLinkMessageField.h"
 #include "QGCLoggingCategory.h"
+#include "mavlink/v2.0/all/mavlink.h"
 
 QGC_LOGGING_CATEGORY(MAVLinkMessageLog, "qgc.analyzeview.mavlinkmessage")
 

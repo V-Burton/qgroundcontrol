@@ -29,24 +29,10 @@ target_link_libraries(MAVLink
         Qt6::QmlIntegration
 )
 
-target_include_directories(MAVLink PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
-############# MAVLink
-
-include(FetchContent)
-FetchContent_Declare(mavlink
-        GIT_REPOSITORY https://github.com/mavlink/c_library_v2.git
-        GIT_TAG 052b8579f8aeb941f34cc9896af22cf1f38939b9
+target_include_directories(MAVLink 
+    PUBLIC 
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/libs/mavlink/generated/include
+        ${CMAKE_SOURCE_DIR}/libs/mavlink/generated/include/mavlink/v2.0/hylight
 )
-FetchContent_MakeAvailable(mavlink)
-
-target_include_directories(MAVLink
-    PUBLIC
-        ${mavlink_SOURCE_DIR}
-        ${mavlink_SOURCE_DIR}/all
-        ${mavlink_SOURCE_DIR}/common
-)
-
-# if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-#   target_compile_options(comm PRIVATE -Wno-address-of-packed-member)
-# endif()
+# TODO: Last line with hylight still needed? Try to remove it.

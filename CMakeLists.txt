@@ -111,6 +111,64 @@ endif()
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
 #######################################################
+#               GStreamer Configuration
+#######################################################
+
+# Redondance dans l'approche pkg et set mais ne fonctionnais pas sans. TODO: optimiser sur une machine dans les builds sont plus rapide.
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GSTREAMER REQUIRED gstreamer-1.0)
+
+set(GSTREAMER_LIBRARIES "/usr/local/lib/libgstreamer-1.0.dylib" "/usr/local/lib/libglib-2.0.dylib")
+set(GSTREAMER_INCLUDE_DIRS "/usr/local/include/gstreamer-1.0" "/usr/local/include/glib-2.0")
+
+
+# Display paths to verify GStreamer is found correctly
+message(STATUS "GStreamer include dirs: ${GSTREAMER_INCLUDE_DIRS}")
+message(STATUS "GStreamer libraries: ${GSTREAMER_LIBRARIES}")
+
+include_directories(${GSTREAMER_INCLUDE_DIRS})
+
+
+#######################################################
+#               MAVLink Configuration
+#######################################################
+
+set(MAVLINK_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/libs/mavlink/generated/include)
+set(MAVLINK_DIALECT "all")
+
+
+#Make sure the directories exist and generate the headers if necessary.
+if(NOT EXISTS ${MAVLINK_INCLUDE_DIR}/mavlink/v2.0/${MAVLINK_DIALECT})
+    message(STATUS "Generating MAVLink headers for dialect: ${MAVLINK_DIALECT}")
+    execute_process(
+        COMMAND python3 ${CMAKE_SOURCE_DIR}/libs/mavlink/pymavlink/tools/mavgen.py
+            --lang=C
+            --wire-protocol=2.0
+            --output=${MAVLINK_INCLUDE_DIR}/mavlink/v2.0
+            ${CMAKE_SOURCE_DIR}/libs/mavlink/message_definitions/v1.0/${MAVLINK_DIALECT}.xml
+        RESULT_VARIABLE MAVGEN_RESULT
+    )
+    if(NOT MAVGEN_RESULT EQUAL 0)
+        message(FATAL_ERROR "Failed to generate MAVLink headers")
+    endif()
+endif()
+
+# Add include path
+include_directories(BEFORE ${MAVLINK_INCLUDE_DIR})
+# Define necessary variables
+add_compile_definitions(
+    MAVLINK_DIALECT=all
+    EXTERNAL_MAVLINK_INCLUDE_DIR="${MAVLINK_INCLUDE_DIR}"
+)
+
+# Use this path in priority. TODO: Test remove for a next buid because redondant with line 157...
+include_directories(BEFORE ${MAVLINK_INCLUDE_DIR})
+
+# Deactivate download of regular MavLink repo. Enable the use of you MavLink dialect.
+set(FETCH_MAVLINK OFF CACHE BOOL "Disable automatic MAVLink download" FORCE)
+
+
+#######################################################
 #               Qt6 Configuration
 #######################################################
 
@@ -532,3 +590,8 @@ elseif(MACOS)
 endif()
 
 include(printSummary)
+
+#TODO: Try to remove this line for next build because of redondance or change it to "target_include_directories" wich is mor specific.
+include_directories(
+    ${CMAKE_SOURCE_DIR}/libs/mavlink/generated/include/mavlink/v2.0
+)
