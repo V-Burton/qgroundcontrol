@@ -23,6 +23,77 @@
     "type":             "double",
     "decimalPlaces":    1,
     "units":            "m/s"
+},
+{
+    "name":             "speed3D",
+    "shortDesc": "Wind Spd (3D)",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "m/s"
+},
+{
+    "name":             "speed2D",
+    "shortDesc": "Wind Spd (2D)",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "m/s"
+},
+{
+    "name":             "horizontalDirection",
+    "shortDesc": "Wind Dir (horiz)",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "deg"
+},
+{
+    "name":             "verticalDirection",
+    "shortDesc": "Wind Dir (vert)",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "deg"
+},
+{
+    "name":             "temperature",
+    "shortDesc": "Temperature",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "C"
+},
+{
+    "name":             "speedSound",
+    "shortDesc": "Speed of Sound",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "m/s"
+},
+{
+    "name":             "humidity",
+    "shortDesc": "Humidity",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "%"
+}, 
+{
+    "name":             "dewPoint",
+    "shortDesc": "Dew Point",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "C"
+},
+{
+    "name":             "pressure",
+    "shortDesc": "Pressure",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "hPa"
+},
+{
+    "name":             "airDensity",
+    "shortDesc": "Air Density",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "kg/m^3"
 }
 ]
 }
+

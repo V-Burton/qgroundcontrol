@@ -63,19 +63,7 @@ void VehicleWindFactGroup::handleMessage(Vehicle* /* vehicle */, mavlink_message
     switch (message.msgid) {
 #ifdef MAVLINK_HYLIGHT_DIALECT
     case MAVLINK_MSG_ID_WIND_SENSOR: {
-        mavlink_wind_sensor_t wind;
-        mavlink_msg_wind_sensor_decode(&message, &wind);
-        
-        _speed3DFact.setRawValue(wind.wind_speed_3d);
-        _speed2DFact.setRawValue(wind.wind_speed_2d);
-        _horizontalDirectionFact.setRawValue(wind.horizontal_wind_direction);
-        _verticalDirectionFact.setRawValue(wind.vertical_wind_direction);
-        _temperatureFact.setRawValue(wind.sonic_temperature);
-        _speedSoundFact.setRawValue(wind.speed_of_sound);
-        _humidityFact.setRawValue(wind.humidity);
-        _dewPointFact.setRawValue(wind.drew_point);
-        _pressureFact.setRawValue(wind.pressure);
-        _airDensityFact.setRawValue(wind.air_density);
+        _handleWindSensor(message);
         break;
     }
 #endif

@@ -111,6 +111,7 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _efiFactGroup                 (this)
     , _terrainFactGroup             (this)
     , _terrainProtocolHandler       (new TerrainProtocolHandler(this, &_terrainFactGroup, this))
+    , _pressureFactGroup            (this)
 {
     _linkManager = _toolbox->linkManager();
 
@@ -226,6 +227,7 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _distanceSensorFactGroup          (this)
     , _localPositionFactGroup           (this)
     , _localPositionSetpointFactGroup   (this)
+    , _pressureFactGroup                (this)
 {
     _linkManager = _toolbox->linkManager();
 
@@ -330,6 +332,7 @@ void Vehicle::_commonInit()
     _addFactGroup(&_gpsFactGroup,               _gpsFactGroupName);
     _addFactGroup(&_gps2FactGroup,              _gps2FactGroupName);
     _addFactGroup(&_windFactGroup,              _windFactGroupName);
+    _addFactGroup(&_pressureFactGroup,          _pressureFactGroupName);
     _addFactGroup(&_vibrationFactGroup,         _vibrationFactGroupName);
     _addFactGroup(&_temperatureFactGroup,       _temperatureFactGroupName);
     _addFactGroup(&_clockFactGroup,             _clockFactGroupName);
@@ -669,6 +672,11 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     case MAVLINK_MSG_ID_WIND_SENSOR: 
     {
         _handleWindSensor(message);
+        break;
+    }
+    case MAVLINK_MSG_ID_RIGID_DATA:
+    {
+        _handleRigidData(message);
         break;
     }
     }
@@ -3985,20 +3993,13 @@ void Vehicle::setMessageRate(uint8_t compId, uint16_t msgId, int32_t rate)
 }
 
 void Vehicle::_handleWindSensor(mavlink_message_t& message)
+{   
+    _windFactGroup.handleMessage(this, message);
+}
+
+void Vehicle::_handleRigidData(mavlink_message_t& message)
 {
-    mavlink_wind_sensor_t wind;
-    mavlink_msg_wind_sensor_decode(&message, &wind);
-    
-    _windFactGroup.speed3D()->setRawValue(wind.wind_speed_3d);
-    _windFactGroup.speed2D()->setRawValue(wind.wind_speed_2d);
-    _windFactGroup.horizontalDirection()->setRawValue(wind.horizontal_wind_direction);
-    _windFactGroup.verticalDirection()->setRawValue(wind.vertical_wind_direction);
-    _windFactGroup.temperature()->setRawValue(wind.sonic_temperature);
-    _windFactGroup.speedSound()->setRawValue(wind.speed_of_sound);
-    _windFactGroup.humidity()->setRawValue(wind.humidity);
-    _windFactGroup.dewPoint()->setRawValue(wind.drew_point);
-    _windFactGroup.pressure()->setRawValue(wind.pressure);
-    _windFactGroup.airDensity()->setRawValue(wind.air_density);
+    _pressureFactGroup.handleMessage(this, message);
 }
 
 /*===========================================================================*/

@@ -38,6 +38,7 @@ SettingsPage {
     property Fact   _viewer3DOsmFilePath:               _viewer3DSettings.osmFilePath
     property Fact   _viewer3DBuildingLevelHeight:       _viewer3DSettings.buildingLevelHeight
     property Fact   _viewer3DAltitudeBias:              _viewer3DSettings.altitudeBias
+    property Fact   _showWindRose:                      _flyViewSettings.showWindRose
 
     QGCFileDialogController { id: fileController }
 
@@ -296,6 +297,39 @@ SettingsPage {
             fact:               _viewer3DAltitudeBias
             enabled:            _viewer3DEnabled.rawValue
             visible:            _viewer3DAltitudeBias.visible
+        }
+    }
+
+    SettingsGroupLayout {
+        Layout.fillWidth:   true
+        heading:            qsTr("Wind Display")
+
+        property var _showWindRose: _flyViewSettings ? _flyViewSettings.showWindRose : null
+
+        FactCheckBoxSlider {
+            Layout.fillWidth:   true
+            text:               qsTr("Show Wind Rose")
+            fact:              _flyViewSettings.showWindRose
+            visible:           true
+            enabled:           true
+            onCheckedChanged: {
+                console.log("Wind Rose checkbox changed:", {
+                    checked: checked,
+                    factValue: _flyViewSettings.showWindRose.value,
+                    rawValue: _flyViewSettings.showWindRose.rawValue,
+                    factVisible: _flyViewSettings.showWindRose.visible,
+                    factEnabled: _flyViewSettings.showWindRose.enabled
+                })
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        console.log("FlyView Settings loaded")
+        console.log("_flyViewSettings:", _flyViewSettings ? "available" : "null")
+        console.log("showWindRose setting:", _flyViewSettings.showWindRose ? "available" : "null")
+        if (_flyViewSettings.showWindRose) {
+            console.log("Current value:", _flyViewSettings.showWindRose.value)
         }
     }
 }

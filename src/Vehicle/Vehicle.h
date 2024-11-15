@@ -44,6 +44,7 @@
 #include "VehicleVibrationFactGroup.h"
 #include "VehicleWindFactGroup.h"
 #include "GimbalController.h"
+#include "VehiclePressureFactGroup.h"
 
 class Actuators;
 class AutoPilotPlugin;
@@ -934,6 +935,7 @@ private slots:
     void _updateAltAboveTerrain             ();
     void _altitudeAboveTerrainReceived      (bool sucess, QList<double> heights);
     void _handleWindSensor                  (mavlink_message_t& message);
+    void _handleRigidData                   (mavlink_message_t& message);
 
 private:
     void _loadJoystickSettings          ();
@@ -1230,6 +1232,7 @@ private:
     const QString _gpsFactGroupName =                QStringLiteral("gps");
     const QString _gps2FactGroupName =               QStringLiteral("gps2");
     const QString _windFactGroupName =               QStringLiteral("wind");
+    const QString _pressureFactGroupName =           QStringLiteral("pressure");
     const QString _vibrationFactGroupName =          QStringLiteral("vibration");
     const QString _temperatureFactGroupName =        QStringLiteral("temperature");
     const QString _clockFactGroupName =              QStringLiteral("clock");
@@ -1262,6 +1265,7 @@ private:
     VehicleEFIFactGroup             _efiFactGroup;
     TerrainFactGroup                _terrainFactGroup;
     QmlObjectListModel              _batteryFactGroupListModel;
+    VehiclePressureFactGroup         _pressureFactGroup;
 
     TerrainProtocolHandler* _terrainProtocolHandler = nullptr;
 

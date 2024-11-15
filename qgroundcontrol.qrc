@@ -351,6 +351,7 @@
         <file alias="Viewer3D/Models3D/Line3D.qml">src/Viewer3D/Viewer3DQml/Models3D/Line3D.qml</file>
         <file alias="Viewer3D/Models3D/Viewer3DVehicleItems.qml">src/Viewer3D/Viewer3DQml/Models3D/Viewer3DVehicleItems.qml</file>
         <file alias="Viewer3D/Viewer3DProgressBar.qml">src/Viewer3D/Viewer3DQml/Viewer3DProgressBar.qml</file>
+        <file alias="QGroundControl/FlightMap/WindRoseWidget.qml">src/FlightMap/Widgets/WindRoseWidget.qml</file>
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>
@@ -420,6 +421,7 @@
         <file alias="VTOLLandingPattern.FactMetaData.json">src/MissionManager/VTOLLandingPattern.FactMetaData.json</file>
         <file alias="Viewer3D.SettingsGroup.json">src/Settings/Viewer3D.SettingsGroup.json</file>
         <file alias="GimbalController.SettingsGroup.json">src/Settings/GimbalController.SettingsGroup.json</file>
+        <file alias="Vehicle/PressureFact.json">src/Vehicle/FactGroups/PressureFact.json</file>
     </qresource>
     <qresource prefix="/MockLink">
         <file alias="APMArduSubMockLink.params">src/Comms/MockLink/APMArduSubMockLink.params</file>

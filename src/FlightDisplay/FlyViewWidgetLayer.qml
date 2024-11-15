@@ -87,7 +87,7 @@ Item {
         id:                 bottomRightRowLayout
         anchors.margins:    _layoutMargin
         anchors.bottom:     parent.bottom
-        anchors.right:      parent.right
+        anchors.horizontalCenter: parent.horizontalCenter
         spacing:            _layoutSpacing
 
         property real bottomEdgeRightInset:     height + _layoutMargin
@@ -200,4 +200,49 @@ Item {
         FlyViewPreFlightChecklistPopup {
         }
     }
+
+    WindRoseWidget {
+        id: windRoseWidget
+        anchors {
+            top: parent.top
+            right: parent.right
+            margins: ScreenTools.defaultFontPixelHeight
+        }
+        windFactGroup: _activeVehicle ? _activeVehicle.windFactGroup : null
+        
+        visible: {
+            var settingsManager = QGroundControl.settingsManager
+            var flyViewSettings = settingsManager ? settingsManager.flyViewSettings : null
+            var showWindRose = flyViewSettings ? flyViewSettings.showWindRose : null
+            
+            var isVisible = showWindRose ? showWindRose.rawValue : false
+            
+            console.log("WindRose Visibility Check:", {
+                hasSettings: settingsManager ? "yes" : "no",
+                hasFlyView: flyViewSettings ? "yes" : "no",
+                hasShowWindRose: showWindRose ? "yes" : "no",
+                rawValue: showWindRose ? showWindRose.rawValue : "N/A",
+                value: showWindRose ? showWindRose.value : "N/A",
+                finalVisibility: isVisible
+            })
+            
+            return isVisible
+        }
+
+        Component.onCompleted: {
+            console.log("WindRoseWidget dimensions:", width, height)
+            console.log("WindRoseWidget position:", x, y)
+            console.log("WindRoseWidget parent:", parent ? "yes" : "no")
+            console.log("WindRoseWidget anchors:", {
+                top: anchors.top ? "yes" : "no",
+                right: anchors.right ? "yes" : "no",
+                margins: anchors.margins
+            })
+        }
+
+        z: QGroundControl.zOrderWidgets + 1
+        width: ScreenTools.defaultFontPixelHeight * 10
+        height: width
+    }
+
 }

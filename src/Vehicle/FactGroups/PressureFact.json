@@ -1,0 +1,42 @@
+{
+    "version":      1,
+    "fileType":  "FactMetaData",
+    "QGC.MetaData.Facts":
+[
+{
+    "name":             "pressureIn",
+    "shortDesc": "Pressure In",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "hPa"
+},
+{
+    "name":             "pressureOut",
+    "shortDesc": "Pressure Out",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "hPa"
+},
+{
+    "name":             "meanIn",
+    "shortDesc": "Mean In",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "hPa"
+},
+{
+    "name":             "meanOut",
+    "shortDesc": "Mean Out",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "hPa"
+},
+{
+    "name":             "differential",
+    "shortDesc": "Differential",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "hPa"
+}
+]
+}

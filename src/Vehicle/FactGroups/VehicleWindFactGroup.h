@@ -11,12 +11,6 @@
 
 #include "FactGroup.h"
 #include "QGCMAVLink.h"
-// TODO: Removed if not needed anymore
-#ifdef MAVLINK_MSG_ID_WIND_SENSOR
-#pragma message "WIND_SENSOR is defined"
-#else
-#pragma message "WIND_SENSOR is NOT defined"
-#endif
 
 class VehicleWindFactGroup : public FactGroup
 {

@@ -39,6 +39,8 @@ qt_add_library(VehicleFactGroups STATIC
     VehicleWindFactGroup.h
     VehicleHygrometerFactGroup.cc
     VehicleHygrometerFactGroup.h
+    VehiclePressureFactGroup.cc
+    VehiclePressureFactGroup.h
 )
 
 target_link_libraries(VehicleFactGroups

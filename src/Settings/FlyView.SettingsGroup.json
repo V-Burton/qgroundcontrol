@@ -74,6 +74,13 @@
     "enumStrings":  "Integrated Compass/Attitude,Horizontal Compass/Attitude,Large Vertical",
     "enumValues":   "qrc:/qml/IntegratedCompassAttitude.qml,qrc:/qml/HorizontalCompassAttitude.qml,qrc:/qml/VerticalCompassAttitude.qml",
     "default":      "qrc:/qml/IntegratedCompassAttitude.qml"
+},
+{
+    "name":             "showWindRose",
+    "shortDesc":        "Show Wind Rose",
+    "longDesc":         "Show/hide the wind rose display",
+    "type":             "bool",
+    "default":     true
 }
 ]
 }
